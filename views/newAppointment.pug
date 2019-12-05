@@ -4,23 +4,30 @@ html
         title Appointment Form
     body
         form(action="/form-submit" method="POST")
+
             div(class="field")
                 label(for="firstname") First Name:  
                 input(type="text", name="firstname", placeholder="Your First Name" required)
+
             div(class="field")
                 label(for="lastname") Last Name: 
                 input(type="text", name="lastname", placeholder="Your Last Name" required)
+
             div(class="field")
                 label(for="email") Email: 
                 input(type="email", name="email", placeholder="Your E-mail" required)
+
             div(class="field")
                 label(for="date") Choose Date:
                 input(type="date", name="date" required)
+
             div(class="field")
                 label(for="time_start") Choose Start time: 
                 input(type="time", name="time_start" required)
+
             div(class="field")
                 label(for="time_start") Choose End time: 
                 input(type="time", name="time_end" required)
+                
             div(class="field")
                 input(type="submit")

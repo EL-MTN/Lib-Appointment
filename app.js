@@ -5,13 +5,13 @@ const app = express();
 const parser = require('body-parser');
 const dbFunc = require('./db');
 
-const port = 1025;
-const url = 'localhost';
-
 app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.use(parser.urlencoded({ extended: true }));
 
+/**
+ * @summary Routing GET requests
+ */
 app.get('/', (req, res) => {
 	dbFunc.getAll((err, rows) => {
 		if (err) throw err;
@@ -23,6 +23,9 @@ app.get('/newAppointment', (req, res) => {
 	res.render('newAppointment');
 });
 
+/**
+ * @summary Routing POST requests for forms
+ */
 app.post('/form-submit', (req, res) => {
 	dbFunc.addAppointment(
 		`${req.body.firstname} ${req.body.lastname}`,
@@ -34,6 +37,17 @@ app.post('/form-submit', (req, res) => {
 	res.redirect('/');
 });
 
-app.listen(port, url, () => {
-	console.log(`App running on ${url}:${port}`);
-});
+/**
+ *
+ * @param {number} port
+ * @param {string} url
+ *
+ * @example start(8080, 'localhost');
+ */
+function start(port, url) {
+	app.listen(port, url, () => {
+		console.log(`App running on ${url}:${port}`);
+	});
+}
+
+start(1025, 'localhost');
