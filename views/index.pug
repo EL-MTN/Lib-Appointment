@@ -1,0 +1,32 @@
+html
+    head
+        link(rel="icon" href="/library.png" type="image/png")
+        title Library Appointment
+        style
+            include index.css
+    body
+        div(class="appointments")
+            table
+                tr
+                    th Name
+                    th E-Mail
+                    th Date
+                    th Starting Time
+                    th Ending Time
+                
+                each val in data  
+                    tr
+                        td=val.name
+                        td=val.email
+                        td=val.date
+                        td=val.time_start
+                        td=val.time_end
+   
+    div(class="footer")
+        button(type="button" onclick="location.href='/newAppointment'") Appoint
+
+    //- ul
+    //-     each val in data
+    //-         li=JSON.stringify(val)
+    //-         li=val.name
+        
