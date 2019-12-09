@@ -4,7 +4,7 @@ const sqlite = require('sqlite3');
 const db = new sqlite.Database('./db/library.sqlite');
 
 db.run(
-	'CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEXT, time_start TEXT UNIQUE, time_end TEXT UNIQUE)'
+	'CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEXT, time_start TEXT, time_end TEXT)'
 );
 
 /**
