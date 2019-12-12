@@ -2,6 +2,19 @@ html
     head
         link(rel="icon" href="/library.png" type="image/png")
         title Appointment Form
+        //- script(src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js")
+        //- script.
+        //-     $(document).ready(() => {
+        //-         $("button").click(() => {
+        //-             $.ajax({
+        //-                 url: "/err",
+        //-                 success: result => {
+        //-                     console.log(result);
+        //-                     $("#ajax").html(result);
+        //-                 }
+        //-             });
+        //-         });
+        //-     });
     body
         form(action="/form-submit" method="POST")
 
@@ -31,3 +44,5 @@ html
                 
             div(class="field")
                 input(type="submit")
+
+        div(id="error")=error

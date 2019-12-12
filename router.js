@@ -33,8 +33,8 @@ router.post('/form-submit', (req, res) => {
 		req.body.date.replace('-', '/') + ' ' + req.body.time_end
 	);
 	if (req_time_max <= req_time_min) {
-		req.err = 'Wront time';
-		res.redirect('/error');
+		req.err = 'Error: Wrong time order.';
+		res.render('newAppointment', { error: err });
 		return;
 	}
 
@@ -53,8 +53,8 @@ router.post('/form-submit', (req, res) => {
 				);
 
 				if (!(req_time_max <= time_min || req_time_min >= time_max)) {
-					err = 'Date crossed.';
-					res.send(err);
+					err = 'Error: Date crossed.';
+					res.render('newAppointment', { error: err });
 					isError = true;
 					return;
 				}
@@ -62,14 +62,14 @@ router.post('/form-submit', (req, res) => {
 		}
 
 		if (!isError) {
-			dbFunc.addrouterointment(
+			dbFunc.addAppointment(
 				`${req.body.firstname} ${req.body.lastname}`,
 				req.body.email,
 				req.body.date,
 				req.body.time_start,
 				req.body.time_end
-            );
-            
+			);
+
 			res.status(200);
 			res.redirect('/');
 		}
