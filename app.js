@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Express Application code
+ * @author Eric Li
+ */
+
+
 'use strict';
 
 const express = require('express');

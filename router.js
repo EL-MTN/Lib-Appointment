@@ -1,9 +1,17 @@
+/**
+ * @fileoverview Express Application code
+ * @author Eric Li
+ */
+
+
+'use strict';
+
 const express = require('express');
 const router = express.Router();
-const dbFunc = require('./db');
+const dbFunc = require('./db').default;
 
 /**
- * @summary Handling GET requests
+ * @description Handling GET requests to pages.
  */
 router.get('/', (req, res) => {
 	dbFunc.getAll((err, rows) => {
@@ -23,7 +31,7 @@ router.get('/error', (req, res) => {
 /* -------------------------------------------- */
 
 /**
- * @summary Form validation. Examines input dates to check for repeats.
+ * @description Form validation. Examines input dates to check for repeats.
  */
 router.post('/form-submit', (req, res) => {
 	const req_time_min = Date.parse(

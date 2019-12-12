@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Express Application code
+ * @author Eric Li
+ */
+
+
 'use strict';
 
 const sqlite = require('sqlite3');
@@ -8,8 +14,8 @@ db.run(
 );
 
 /**
- * @summary Gets all appointments in the 'appointments' table
- * @returns A callback, which contains two params: @param {Error} err, @param {Array} rows
+ * @description Gets all appointments in the 'appointments' table
+ * @returns A callback, which contains two params: @param {Error} err, @param {Object[]} rows
  */
 function getAll(cb) {
 	db.all('SELECT * FROM appointments', (err, rows) => {
@@ -24,7 +30,8 @@ function getAll(cb) {
  * @param {Date} time_start
  * @param {Date} time_end
  *
- * @summary Inserts an appointment into the 'appointments' table
+ * @description Inserts an appointment into the 'appointments' table
+ * @example addAppointment('Eric Li', '71341@qq.com', '2019-12-31', '07:00', '07:15');
  */
 function addAppointment(name, email, date, time_start, time_end) {
 	db.run(
@@ -40,7 +47,7 @@ function addAppointment(name, email, date, time_start, time_end) {
  *
  * @param {Date} time_start
  *
- * @summary Given a time 'time_start', removes the appointment with that time
+ * @description Given a time 'time_start', removes the appointment with that time
  */
 function cancelAppointment(time_start) {
 	db.run(
