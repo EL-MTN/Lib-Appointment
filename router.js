@@ -8,7 +8,7 @@
 
 const express = require('express');
 const router = express.Router();
-const dbFunc = require('./db').default;
+const dbFunc = require('./db');
 
 /**
  * @description Handling GET requests to pages.
@@ -34,15 +34,16 @@ router.get('/error', (req, res) => {
  * @description Form validation. Examines input dates to check for repeats.
  */
 router.post('/form-submit', (req, res) => {
+	const body = req.body;
 	const req_time_min = Date.parse(
-		req.body.date.replace('-', '/') + ' ' + req.body.time_start
+		body.date.replace('-', '/') + ' ' + body.time_start
 	);
 	const req_time_max = Date.parse(
-		req.body.date.replace('-', '/') + ' ' + req.body.time_end
+		body.date.replace('-', '/') + ' ' + body.time_end
 	);
 	if (req_time_max <= req_time_min) {
-		req.err = 'Error: Wrong time order.';
-		res.render('newAppointment', { error: err });
+		req.err = 'Your starting time seems to be earlier than the ending time. Try switching the orders.';
+		res.render('newAppointment', { error: err, firstname: body.firstname, lastname: body.lastname, email: body.email, date: body.date });
 		return;
 	}
 
@@ -52,7 +53,7 @@ router.post('/form-submit', (req, res) => {
 		if (err) throw err;
 		for (let i = 0; i < rows.length; i++) {
 			const object = rows[i];
-			if (object.date == req.body.date) {
+			if (object.date == body.date) {
 				const time_min = Date.parse(
 					object.date.replace('-', '/') + ' ' + object.time_start
 				);
@@ -61,8 +62,8 @@ router.post('/form-submit', (req, res) => {
 				);
 
 				if (!(req_time_max <= time_min || req_time_min >= time_max)) {
-					err = 'Error: Date crossed.';
-					res.render('newAppointment', { error: err });
+					err = 'Your time chosen interfered with others. Try choosing a new time.';
+					res.render('newAppointment', { error: err, firstname: body.firstname, lastname: body.lastname, email: body.email, date: body.date });
 					isError = true;
 					return;
 				}
@@ -71,11 +72,11 @@ router.post('/form-submit', (req, res) => {
 
 		if (!isError) {
 			dbFunc.addAppointment(
-				`${req.body.firstname} ${req.body.lastname}`,
-				req.body.email,
-				req.body.date,
-				req.body.time_start,
-				req.body.time_end
+				`${body.firstname} ${body.lastname}`,
+				body.email,
+				body.date,
+				body.time_start,
+				body.time_end
 			);
 
 			res.status(200);

@@ -10,7 +10,7 @@ const sqlite = require('sqlite3');
 const db = new sqlite.Database('./db/library.sqlite');
 
 db.run(
-	'CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEXT, time_start TEXT, time_end TEXT)'
+    'CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEXT, time_start TEXT, time_end TEXT)'
 );
 
 /**
@@ -18,9 +18,9 @@ db.run(
  * @returns A callback, which contains two params: @param {Error} err, @param {Object[]} rows
  */
 function getAll(cb) {
-	db.all('SELECT * FROM appointments', (err, rows) => {
-		cb(err, rows);
-	});
+    db.all('SELECT * FROM appointments ORDER BY date ASC, time_start ASC', (err, rows) => {
+        cb(err, rows);
+    });
 }
 
 /**
@@ -34,13 +34,12 @@ function getAll(cb) {
  * @example addAppointment('Eric Li', '71341@qq.com', '2019-12-31', '07:00', '07:15');
  */
 function addAppointment(name, email, date, time_start, time_end) {
-	db.run(
-		'INSERT INTO appointments VALUES(?, ?, ?, ?, ?)',
-		[name, email, date, time_start, time_end],
-		err => {
-			if (err) throw err;
-		}
-	);
+    db.run(
+        'INSERT INTO appointments VALUES(?, ?, ?, ?, ?)', [name, email, date, time_start, time_end],
+        err => {
+            if (err) throw err;
+        }
+    );
 }
 
 /**
@@ -50,9 +49,9 @@ function addAppointment(name, email, date, time_start, time_end) {
  * @description Given a time 'time_start', removes the appointment with that time
  */
 function cancelAppointment(time_start) {
-	db.run(
-		`DELETE FROM appointments WHERE time_start = "${formatDate(time_start)}"`
-	);
+    db.run(
+        `DELETE FROM appointments WHERE time_start = "${formatDate(time_start)}"`
+    );
 }
 
 module.exports = { getAll, addAppointment, cancelAppointment };

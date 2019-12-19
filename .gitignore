@@ -1,5 +1,4 @@
-node_modules/
-db/
-.vscode/
-.eslintrc.json
+node_modules
+.vscode
 .DS_Store
+db/library.sqlite

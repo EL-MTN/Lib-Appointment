@@ -17,12 +17,18 @@ td {
 }
 
 th {
-	background-color: #4caf50;
+	background-color: #368ef6;
 	color: #fff;
 }
 
+/*HORRIBLE COLOR DESIGN, FIX SOON*/
+
+tr:nth-child(even) {
+	background-color: gold;
+}
+
 tr:nth-child(odd) {
-	background-color: #f2f2f2;
+	background-color: gold;
 }
 
 /****************************************/
