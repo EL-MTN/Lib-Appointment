@@ -1,5 +1,10 @@
 html {
 	font-family: Arial, Helvetica, sans-serif;
+	background: linear-gradient(
+		132deg,
+		rgba(161, 196, 253, 1) 0%,
+		rgba(194, 233, 251, 1) 100%
+	);
 }
 
 /****************************************/
@@ -10,6 +15,11 @@ table {
 	border-collapse: collapse;
 }
 
+.header {
+	height: 30px;
+	font-size: 17px;
+}
+
 th,
 td {
 	padding: 5px;
@@ -17,18 +27,27 @@ td {
 }
 
 th {
-	background-color: #368ef6;
+	background-color: #2d7fb5;
 	color: #fff;
+	height: 20px;
 }
 
-/*HORRIBLE COLOR DESIGN, FIX SOON*/
+tr {
+	color: black;
+	height: 50px;
+	font-size: 15px;
+}
 
 tr:nth-child(even) {
-	background-color: gold;
+	background-color: white;
 }
 
 tr:nth-child(odd) {
-	background-color: gold;
+	background-color: #54aae3;
+}
+
+tr:hover {
+	background-color: gray;
 }
 
 /****************************************/
@@ -39,11 +58,13 @@ tr:nth-child(odd) {
 }
 
 button {
-	background-color: #4caf50;
+	background-color: #4aa2dd;
 	color: #fff;
 	font-size: 14px;
 	font-weight: bold;
 	height: 3%;
 	width: 7%;
 	margin: auto;
+	border-radius: 5px;
+	border: none;
 }

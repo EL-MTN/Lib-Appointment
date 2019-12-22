@@ -3,7 +3,6 @@
  * @author Eric Li
  */
 
-
 'use strict';
 
 const express = require('express');
@@ -25,7 +24,7 @@ app.use('/', router);
  */
 function start(port, url) {
 	app.listen(port, url, () => {
-		console.log(`App running on ${url}:${port}`);
+		console.log(`\x1b[1m\x1b[3m\x1b[36mApp running on \x1b[32m${url}:${port}`);
 	});
 }
 
