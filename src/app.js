@@ -5,6 +5,7 @@
 
 'use strict';
 
+const chalk = require('chalk');
 const express = require('express');
 const app = express();
 const parser = require('body-parser');
@@ -17,14 +18,14 @@ app.use('/', router);
 
 /**
  *
- * @param {number} port
- * @param {string} url
+ * @param {Number} port
+ * @param {String} url
  *
  * @example start(8080, 'localhost');
  */
 function start(port, url) {
 	app.listen(port, url, () => {
-		console.log(`\x1b[1m\x1b[3m\x1b[36mApp running on \x1b[32m${url}:${port}`);
+		console.log(chalk`{bold App running on {greenBright ${url}:${port}}}`);
 	});
 }
 
