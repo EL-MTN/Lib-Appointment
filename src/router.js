@@ -3,12 +3,24 @@
  * @author Eric Li
  */
 
-
 'use strict';
 
+const chalk = require('chalk');
 const express = require('express');
 const router = express.Router();
 const dbFunc = require('./db');
+const mailer = require('./mailer');
+
+/**
+ * @param {String} host Enter the host of your smtp service
+ * @param {Number} port Enter the port for your smtp service
+ * @param {String} user Enter the username for your service
+ * @param {String} user Enter the password for your service
+ */
+const host = 'smtp.ethereal.email';
+const port = 587;
+const user = 'makenzie.walter6@ethereal.email';
+const pass = 'pcz2P1zB5TMXDqkge9';
 
 /**
  * @description Handling GET requests to pages.
@@ -83,7 +95,7 @@ router.post('/form-submit', (req, res) => {
 			}
 		}
 
-		// If there's no errors present, then return to main page
+		// If there's no errors present, then return to main page and sends email
 		if (!err) {
 			dbFunc.addAppointment(
 				`${body.firstname} ${body.lastname}`,
@@ -92,6 +104,13 @@ router.post('/form-submit', (req, res) => {
 				body.time_start,
 				body.time_end
 			);
+
+			mailer.sendMail(host, port, user, pass, body.email, `${body.date} ${body.time_start}`, info => {
+				console.log('reached')
+				console.log(
+					chalk`{bold [{greenBright ✓}]} Successful appointment at {bold.greenBright ${body.date} ${body.time_start}}}. Email successfully sent to {bold.greenBright ${body.email}}}`
+				);
+			});
 
 			res.status(200);
 			res.redirect('/');

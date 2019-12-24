@@ -12,6 +12,7 @@ db.run('CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEX
 
 /**
  * @description Gets all appointments in the 'appointments' table
+ * @param {Function} cb
  * @returns A callback, which contains two params: @param {Error} err, @param {Object[]} rows
  */
 function getAll(cb) {
@@ -23,8 +24,8 @@ function getAll(cb) {
 
 /**
  *
- * @param {string} name
- * @param {string} email
+ * @param {String} name
+ * @param {String} email
  * @param {Date} time_start
  * @param {Date} time_end
  *
