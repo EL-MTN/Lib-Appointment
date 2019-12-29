@@ -1,5 +1,5 @@
 /**
- * @fileoverview Express Application code
+ * @fileoverview Database functions
  * @author Eric Li
  */
 

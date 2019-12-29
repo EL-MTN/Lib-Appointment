@@ -7,9 +7,11 @@
 
 const chalk = require('chalk');
 const express = require('express');
-const app = express();
 const parser = require('body-parser');
 const router = require('./router');
+
+// Creating the express application and giving it settings
+const app = express();
 
 app.set('view engine', 'pug');
 app.use(express.static('public'));

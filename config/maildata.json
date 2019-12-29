@@ -1,0 +1,15 @@
+{
+	"description": "This is the configuration file for the mail service.",
+
+	"?host": "Enter the host for your SMTP service",
+	"host": "smtp.ethereal.email",
+
+	"?port": "Enter the port your service provider allows",
+	"port": 587,
+
+	"?user": "Enter your username",
+	"user": "pinkie.mueller@ethereal.email",
+
+	"?pass": "Enter your password",
+	"pass": "cn5c1KhCMYxF5FYae2"
+}

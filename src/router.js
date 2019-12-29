@@ -1,26 +1,27 @@
 /**
- * @fileoverview Express Application code
+ * @fileoverview Express router
  * @author Eric Li
  */
 
 'use strict';
 
 const chalk = require('chalk');
-const express = require('express');
-const router = express.Router();
 const dbFunc = require('./db');
+const express = require('express');
+const fs = require('fs');
 const mailer = require('./mailer');
 
+// Creating the express router
+const router = express.Router();
+
 /**
- * @param {String} host Enter the host of your smtp service
- * @param {Number} port Enter the port for your smtp service
- * @param {String} user Enter the username for your service
- * @param {String} user Enter the password for your service
+ * @description The 'fs' module will read your configuration data and pass it into the parameters
  */
-const host = 'smtp.ethereal.email';
-const port = 587;
-const user = 'makenzie.walter6@ethereal.email';
-const pass = 'pcz2P1zB5TMXDqkge9';
+const mailConfig = JSON.parse(fs.readFileSync(`${__dirname}/../config/maildata.json`, 'utf-8'));
+const host = mailConfig.host;
+const port = mailConfig.port;
+const user = mailConfig.user;
+const pass = mailConfig.pass;
 
 /**
  * @description Handling GET requests to pages.
@@ -106,10 +107,7 @@ router.post('/form-submit', (req, res) => {
 			);
 
 			mailer.sendMail(host, port, user, pass, body.email, `${body.date} ${body.time_start}`, info => {
-				console.log('reached')
-				console.log(
-					chalk`{bold [{greenBright ✓}]} Successful appointment at {bold.greenBright ${body.date} ${body.time_start}}}. Email successfully sent to {bold.greenBright ${body.email}}}`
-				);
+				console.log(chalk`{bold [{greenBright ✓}] Successful appointment at {bold.greenBright ${body.date} ${body.time_start}}. Email successfully sent to {bold.greenBright ${body.email}}}`);
 			});
 
 			res.status(200);

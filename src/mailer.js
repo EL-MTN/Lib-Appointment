@@ -1,14 +1,21 @@
+/**
+ * @fileoverview SMTP service code
+ * @author Eric Li
+ */
+
+'use strict';
+
 const mail = require('nodemailer');
 
 /**
- * @param {String} host 
- * @param {Number} port 
- * @param {String} user 
- * @param {String} pass 
- * @param {String} client 
- * @param {String} time 
- * @param {Function} cb 
- * 
+ * @param {String} host
+ * @param {Number} port
+ * @param {String} user
+ * @param {String} pass
+ * @param {String} client
+ * @param {String} time
+ * @param {Function} cb
+ *
  * @description This function sends an email with a selected template to a client
  */
 function sendMail(host, port, user, pass, client, time, cb) {
