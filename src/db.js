@@ -13,7 +13,7 @@ db.run('CREATE TABLE IF NOT EXISTS appointments (name TEXT, email TEXT, date TEX
 /**
  * @description Gets all appointments in the 'appointments' table
  * @param {Function} cb
- * @returns A callback, which contains two params: @param {Error} err, @param {Object[]} rows
+ * @returns A callback, which contains two params: @param {Error} err, @param {Array<Object>} rows
  */
 function getAll(cb) {
 	refreshDate(res => {});

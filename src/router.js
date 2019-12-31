@@ -37,8 +37,8 @@ router.get('/newAppointment', (req, res) => {
 	res.render('newAppointment');
 });
 
-router.get('/error', (req, res) => {
-	res.send(req.err);
+router.get('/cancel', (req, res) => {
+	res.render('cancel.pug');
 });
 
 /* -------------------------------------------- */
@@ -107,13 +107,19 @@ router.post('/form-submit', (req, res) => {
 			);
 
 			mailer.sendMail(host, port, user, pass, body.email, `${body.date} ${body.time_start}`, info => {
-				console.log(chalk`{bold [{greenBright ✓}] Successful appointment at {bold.greenBright ${body.date} ${body.time_start}}. Email successfully sent to {bold.greenBright ${body.email}}}`);
+				console.log(
+					chalk`{bold [{greenBright ✓}] Successful appointment at {bold.greenBright ${body.date} ${body.time_start}}. Email successfully sent to {bold.greenBright ${body.email}}}`
+				);
 			});
 
 			res.status(200);
 			res.redirect('/');
 		}
 	});
+});
+
+router.post('/cancel-appointment', (req, res) => {
+
 });
 
 module.exports = router;

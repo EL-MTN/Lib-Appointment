@@ -3,6 +3,7 @@ html
         link(rel="icon" href="/library.png" type="image/png")
         title Library Appointment
         style
+            include main.css
             include index.css
     body
         div(class="appointments")
@@ -13,7 +14,7 @@ html
                     th Date
                     th Starting Time
                     th Ending Time
-                
+
                 each val in data  
                     tr
                         td=val.name
@@ -21,7 +22,7 @@ html
                         td=val.date
                         td=val.time_start
                         td=val.time_end
-   
+
     div(class="footer")
         button(type="button" onclick="location.href='/newAppointment'") Appoint
-        
+        button(type="button" onclick="location.href='/cancel'") Cancel
